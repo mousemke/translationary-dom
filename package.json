@@ -1,0 +1,71 @@
+{
+  "name": "translationary-dom",
+  "version": "0.0.1",
+  "description": "A dom capable wrapper for easier implementation of translationary",
+  "main": "./dist/index.mjs",
+  "exports": {
+    "basic": "./dist/index.js",
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs",
+    "iife": "./dist/index.iife.js"
+  },
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && rollup src/index.ts --config rollup.config.js",
+    "test:lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' --fix",
+    "prepack": "npm run build",
+    "prettier": "prettier --write '**/*.{js,ts}'",
+    "test": "npm run prettier && npm run test:lint && npm run test:types && npm run test:unit",
+    "test:unit": "jest --coverage",
+    "test:coverage": "jest --coverage && if [[ $OSTYPE == darwin* ]]; then open ./coverage/lcov-report/index.html; else xdg-open ./coverage/lcov-report/index.html; fi",
+    "test:types": "tsc",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mousemke/translationary-dom.git"
+  },
+  "contributors": [
+    {
+      "name": "Sadie Braun",
+      "email": "sadie@knoblau.ch"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "translationary": "^0.0.7"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^17.0.3",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.2.3",
+    "@types/jest": "^28.1.6",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "commitlint": "^17.0.3",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.4.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^7.0.0",
+    "jest": "^28.1.3",
+    "lint-staged": "^11.1.1",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.55.0",
+    "rollup-plugin-dts": "^3.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-jest": "^28.0.7",
+    "typescript": "^4.3.5"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "eslint --ext .js,.jsx,.ts,.tsx"
+    ]
+  }
+}
